@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}
+News Articles
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Explore Articles</h2>
+    <style>
+        /* Style for category links */
+        .category-link {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .category-link:hover,
+        .category-link.active {
+            color: #000;
+        }
+
+        .category-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #007bff;
+            transition: width 0.3s;
+        }
+
+        .category-link.active::after {
+            width: 100%;
+        }
+
+        /* General button styling */
+        button#leftArrow, button#rightArrow {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        button#leftArrow:hover,
+        button#rightArrow:hover {
+            background-color: #f7f7f7;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Arrow icons */
+        button#leftArrow i,
+        button#rightArrow i {
+            font-size: 18px;
+            color: #555;
+        }
+
+        button#leftArrow:hover i,
+        button#rightArrow:hover i {
+            color: #007bff;
+        }
+
+
+    </style>
+    <div class="d-flex align-items-center mb-4 position-relative">
+        <button id="leftArrow" class="btn btn-light shadow-sm me-2 rounded-circle">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div id="categoryContainer" class="d-flex overflow-hidden flex-nowrap w-100" style="scroll-behavior: smooth;">
+            {% for category in categories %}
+            <div class="px-3 mx-2">
+                <a href="/news-articles?q={{ category|lower }}" 
+                class="category-link {{ 'active' if query == category|lower else '' }}">
+                    {{ category }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <button id="rightArrow" class="btn btn-light shadow-sm ms-2 rounded-circle">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    
+
+    <!-- Article List -->
+    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="row">
+            {% for story in stories %}
+            <div class="col-7 mb-4">
+                <div class="p-3" style="border-bottom: 2px solid #ddd;">
+                    <h5>{{ story.title }}</h5>
+                    <p class="text-muted mb-1">
+                        By <strong>{{ story.author.name }}</strong> - {{ story.wordCount }} words
+                    </p>
+                    <p class="text-muted small">Reading Time: {{ story.readingTime | round(1) }} mins</p>
+                    <p>
+                        <span class="badge bg-primary">
+                            <i class="fa-solid fa-hands-clapping"></i> {{ story.clapCount }}
+                        </span>
+                        <span class="badge bg-success">
+                            <i class="fa-solid fa-comment"></i> {{ story.responses }}
+                        </span>
+                    </p>
+                    <a href="{{ story.url }}" target="_blank" class="btn btn-link btn-sm">
+                        Read More
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between mt-4">
+            {% if page > 0 %}
+            <a href="/news-articles?q={{ query }}&page={{ page - 1 }}" class="btn btn-outline-primary btn-sm">&lt; Previous</a>
+            {% else %}
+            <span></span>
+            {% endif %}
+            <a href="/news-articles?q={{ query }}&page={{ page + 1 }}" class="btn btn-outline-primary btn-sm">Next &gt;</a>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Scrollable Categories -->
+<script>
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
+    const categoryContainer = document.getElementById('categoryContainer');
+
+    leftArrow.addEventListener('click', () => {
+        categoryContainer.scrollBy({ left: -200, behavior: 'smooth' });
+    });
+
+    rightArrow.addEventListener('click', () => {
+        categoryContainer.scrollBy({ left: 200, behavior: 'smooth' });
+    });
+</script>
+{% endblock %}

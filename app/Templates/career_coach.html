@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Your Career Coach - The Leo Programmer 011
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mb-4">
+        <h4 id="heading" class="text-dark" style="font-family: 'Courier New', Courier, monospace; font-size: 25px; color: #333; letter-spacing: 1px; font-weight: bold; text-transform: none; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s ease-in-out;">
+            Hey Voyager 🌍, I’m <strong>Leo 🦁</strong> – Your Career Compass 🧭 Ready to Sail You Beyond the Horizon! <br>
+            <span style="font-size: 14px; font-weight: normal; color: #555; transition: all 0.3s ease-in-out;">
+                I’m all ears 👂 and ready to listen, your career guide through thick and thin 💪. 
+                No matter how stormy the seas 🌊, I’m here to steer you safely through 🚀, guiding you past every obstacle ⛰️. 
+                Together, we’ll conquer your doubts 💭, sail past your fears 😨, and dock at the harbor of success 🏆. 
+                Your adventure toward greatness starts now ⏳ – and I’m here to make sure you land where your dreams live 🌈!
+            </span>
+        </h4>                
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center min-vh-100" style="font-family: 'Courier New', Courier, monospace; background-color: #f4f4f4;">
+        <div class="w-100 p-4" style="max-width: 1000px; background-color: #ffffff; border-radius: 15px; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);">
+            <!-- Header Section -->
+            <div class="text-center mb-4" style="text-align: center;">
+                <h3 id="main-heading" style="font-family: 'Courier New', Courier, monospace; font-size: 32px; color: #333; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); transition: all 0.3s ease-in-out;">
+                    The Leo Programmer - 011 🦁
+                </h3>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="d-flex flex-column" id="chat-body" style="height: 400px; max-height: 500px; overflow-y: auto; padding: 20px; margin-bottom: 20px;">
+                <!-- Dynamic chat messages will be inserted here -->
+                {% if messages %}
+                    <!-- Inside your template, where you want to show the chat messages -->
+                    {% for message in messages %}
+                        <div class="d-flex flex-column mb-3">
+                            <div class="d-flex {% if message.prompt %}justify-content-end{% else %}justify-content-start{% endif %}">
+                                <div class="chat-message {% if message.prompt %}bg-primary text-white{% else %}bg-light text-dark{% endif %} p-3 rounded-3" style="max-width: 75%; font-size: 14px; font-weight: bold; line-height: 1.5;">
+                                    {{ message.prompt }} <!-- User's input -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column mb-3">
+                            <div class="d-flex {% if message.response %}justify-content-start{% else %}justify-content-end{% endif %}">
+                                <div class="chat-message {% if message.response %}bg-light text-dark{% else %}bg-primary text-white{% endif %} p-3 rounded-3" style="max-width: 75%; font-size: 14px; font-weight: bold; line-height: 1.5;">
+                                    {{ message.response|safe }} <!-- Leo's response -->
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="d-flex flex-column mb-3">
+                        <div class="d-flex justify-content-start">
+                            <div class="chat-message bg-light text-dark p-3 rounded-3" style="max-width: 75%; font-size: 14px; font-weight: bold; line-height: 1.5;">
+                                Hey there! 👋 How are you doing today? I'm all ears 👂, ready to listen and help you with anything on your career journey! Let me know what's on your mind, and we'll figure it out together 🚀.
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- User Input Section -->
+            <form id="chat-form" method="post" action="/your-career_coach-leo011" class="mt-3">
+                <div class="d-flex">
+                    <textarea id="userQuery" name="userQuery" class="form-control" placeholder="Type your question here..." rows="2" style="font-family: 'Courier New', Courier, monospace; border-radius: 10px; box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); resize: none;"></textarea>
+                    <button type="submit" class="btn btn-warning ms-3" style="border-radius: 10px; font-weight: bold;">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home - (PBSC-Ignite)
+{% endblock %}
+
+{% block content %}
+    <!-- Welcome Text -->
+    <div class="jumbotron text-center py-5">
+        <h1 class="display-4">Welcome to PBSC-Ignite</h1>
+        <p class="lead mb-0">AI-Driven Career Readiness Platform.</p>
+
+        <!-- Error Message -->
+        {% if message %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="container mt-5">
+        <!-- Carousel -->
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{{ url_for('static', filename='images/image-1.jpeg') }}" class="d-block w-100" alt="AI Career Platform">                
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/image-2.jpeg') }}" class="d-block w-100" alt="Skills Development">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/image-3.jpeg') }}" class="d-block w-100" alt="Innovation at Its Best">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/image-4.jpeg') }}" class="d-block w-100" alt="Innovation at Its Best">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ url_for('static', filename='images/image-5.jpeg') }}" class="d-block w-100" alt="Innovation at Its Best">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="my-5" style="width: 80%; margin-left: auto; margin-right: auto; 
+        background: linear-gradient(to right, rgba(10, 237, 199, 0.1) 0%, #0aedc7 30%, #0aedc7 70%, rgba(10, 237, 199, 0.1) 100%);
+        height: 5px; border-radius: 5px;">
+    </div>
+    
+    <section class="gradient-custom-5">
+        <div class="container py-3">
+            <h3 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #333; font-size: 32px;">
+                Top 5 Companies that Visited This Year
+            </h3><br>
+            <div class="main-timeline">
+                {% for company in companies %}
+                <div class="timeline-item {% if loop.index is odd %}left{% else %}right{% endif %}">
+                    <h5>{{ company.name }}</h5>
+                    <span class="small text-muted">
+                        <i class="fas fa-clock me-1"></i>{{ company.visit_date }}
+                    </span>
+                    <p class="mt-2 mb-0">Role offered: <strong>{{ company.role_offered }}</strong></p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+      
+
+    <div class="my-5" style="width: 80%; margin-left: auto; margin-right: auto; 
+        background: linear-gradient(to right, rgba(10, 237, 199, 0.1) 0%, #0aedc7 30%, #0aedc7 70%, rgba(10, 237, 199, 0.1) 100%);
+        height: 5px; border-radius: 5px;">
+    </div>
+    
+    
+    <div class="container mt-5">
+        <!-- Carousel for New Articles -->
+        <h3 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #333; font-size: 32px;">New Articles</h3>
+        <div id="articleCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for i in range(0, stories|length, 3) %}
+                    <div class="carousel-item {% if loop.first %} active {% endif %}">
+                        <div class="row">
+                            <!-- Loop to show 3 articles per carousel item -->
+                            {% for story in stories[i:i+3] %}
+                                <div class="col-md-4 mb-4">
+                                    <div class="p-3" style="border-bottom: 2px solid #ddd;">
+                                        <h5>{{ story.title }}</h5>
+                                        <p class="text-muted mb-1">
+                                            By <strong>{{ story.author.name }}</strong> - {{ story.wordCount }} words
+                                        </p>
+                                        <p class="text-muted small">Reading Time: {{ story.readingTime | round(1) }} mins</p>
+                                        <p>
+                                            <span class="badge bg-primary">
+                                                <i class="fa-solid fa-hands-clapping"></i> {{ story.clapCount }}
+                                            </span>
+                                            <span class="badge bg-success">
+                                                <i class="fa-solid fa-comment"></i> {{ story.responses }}
+                                            </span>
+                                        </p>
+                                        <a href="{{ story.url }}" target="_blank" class="btn btn-link btn-sm">
+                                            Read More
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#articleCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#articleCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    
+    
+
+    <div class="my-5" style="width: 80%; margin-left: auto; margin-right: auto; 
+        background: linear-gradient(to right, rgba(10, 237, 199, 0.1) 0%, #0aedc7 30%, #0aedc7 70%, rgba(10, 237, 199, 0.1) 100%);
+        height: 5px; border-radius: 5px;">
+    </div>
+
+    <!-- Bottom Section: Why Choose Career Coach Leo? -->
+    <div class="container mt-5">
+        <h3 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #333; font-size: 32px;">Why Choose Career Coach Leo?</h3>
+        <ul class="list-group">
+            <li class="list-group-item" style="font-size: 18px; background-color: #f9f9f9; border: 1px solid #ddd;">Expert advice tailored to your career aspirations.</li>
+            <li class="list-group-item" style="font-size: 18px; background-color: #f9f9f9; border: 1px solid #ddd;">Insights into the latest industry trends and skills.</li>
+            <li class="list-group-item" style="font-size: 18px; background-color: #f9f9f9; border: 1px solid #ddd;">Interactive support to help you make informed decisions.</li>
+        </ul>
+                
+        <!-- Testimonials Section: Career Guidance Examples -->
+        <div class="container mt-5">
+            <h3 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #333; font-size: 32px;">How Career Coach Leo Can Guide Users</h3>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <p style="font-size: 16px; color: #555;">
+                        Let's see how one of the users, <strong>Gandham Mani Saketh</strong>, interacted with Career Coach Leo. Here are a couple of examples of questions asked and the responses generated by the bot:
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="testimonial-card" style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                        <p style="font-size: 16px; color: #555; font-style: italic;">
+                            <strong>User asks:</strong><br>
+                            What are my skills?
+                        </p>
+                        <p style="font-size: 16px; color: #555; font-style: italic;">
+                            <strong>Career Coach Leo responds:</strong><br>
+                            You've got a great skillset, Saketh! Your profile lists Data Analysis, Streamlit, Deep Learning, Machine Learning, SQL, MongoDB, Python, CSS, and HTML5. Quite a range!
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="testimonial-card" style="background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+                        <p style="font-size: 16px; color: #555; font-style: italic;">
+                            <strong>User asks:</strong><br>
+                            Which role can I pursue according to my profile?
+                        </p>
+                        <p style="font-size: 16px; color: #555; font-style: italic;">
+                            <strong>Career Coach Leo responds:</strong><br>
+                            Based on your skills and experience, Saketh, you could pursue roles like Data Scientist, Machine Learning Engineer, Data Analyst, or Web Developer. Which one sounds most interesting to you?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Main container for the timeline */
+        .main-timeline {
+        position: relative;
+        padding: 20px 0;
+        overflow: hidden; /* To hide the overflow of animations */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+
+        /* Center Line */
+        .main-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: #ccc;
+        transform: translateX(-50%);
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+        display: flex;
+        flex-direction: column;
+        width: 80%;  /* Adjust the width to make cards less wide */
+        max-width: 600px; /* Ensure the cards don't exceed a certain width */
+        margin-bottom: 30px;
+        position: relative;
+        opacity: 0;
+        transform: translateX(0);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Animation for showing items */
+        .timeline-item.show {
+        opacity: 1;
+        transform: translateX(0);
+        }
+
+        /* Left-aligned content */
+        .timeline-item.left {
+        align-items: flex-end;
+        margin-right: 5%; /* Adjust left margin for alignment */
+        text-align: right; /* Ensure left-aligned text */
+        }
+
+        /* Right-aligned content */
+        .timeline-item.right {
+        align-items: flex-start;
+        margin-left: 5%; /* Adjust right margin for alignment */
+        text-align: left; /* Ensure right-aligned text */
+        }
+
+        /* Timeline Cards */
+        .timeline-item .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        margin: 10px 0;
+        transition: all 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        /* Timeline Card Hover Effect */
+        .timeline-item .card:hover {
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timeline Content */
+        .timeline-item .card-body {
+        padding: 20px;
+        }
+
+        .timeline-item .card-body h5 {
+        font-size: 18px;
+        font-weight: bold;
+        }
+
+        .timeline-item .card-body .small {
+        font-size: 12px;
+        }
+
+        .timeline-item .card-body p {
+        margin-top: 10px;
+        }
+
+        /* Show the items with delay for a timeline effect */
+        .main-timeline .timeline-item:nth-child(1) {
+        animation: show-item 0.6s ease-out forwards 0.2s;
+        }
+
+        .main-timeline .timeline-item:nth-child(2) {
+        animation: show-item 0.6s ease-out forwards 0.4s;
+        }
+
+        .main-timeline .timeline-item:nth-child(3) {
+        animation: show-item 0.6s ease-out forwards 0.6s;
+        }
+
+        .main-timeline .timeline-item:nth-child(4) {
+        animation: show-item 0.6s ease-out forwards 0.6s;
+        }
+
+
+        .main-timeline .timeline-item:nth-child(5) {
+        animation: show-item 0.6s ease-out forwards 0.6s;
+        }
+
+
+        @keyframes show-item {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        }
+
+
+    </style>
+
+{% endblock %}

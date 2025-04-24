@@ -1,0 +1,640 @@
+<!-- student_dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}
+Student Dashboard - (PBSC-Ignite)
+{% endblock %}
+
+{% block content %}
+<style>
+/* Modern Color Scheme */
+:root {
+  --primary-color: #4B49AC;
+  --secondary-color: #98BDFF;
+  --accent-color: #7DA0FA;
+  --text-primary: #2B2B2B;
+  --text-secondary: #6B778C;
+  --card-shadow: 0 8px 16px rgba(75, 73, 172, 0.1);
+}
+
+/* Card Styles */
+.dashboard-card {
+  position: relative;
+  padding: 25px;
+  margin-bottom: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(75, 73, 172, 0.15);
+}
+
+/* Edit Button Styles */
+.edit-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 10;
+}
+
+.edit-button:hover {
+  background: var(--primary-color);
+  transform: rotate(180deg);
+}
+
+/* Form Container Styles */
+.form-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.form-container.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Close Form Button */
+.close-form {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #4B49AC;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-form:hover {
+  background: #3634A6;
+  transform: rotate(90deg);
+}
+
+/* Form Styles */
+.form-wrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(75, 73, 172, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(75, 73, 172, 0.25);
+}
+
+/* Section Styles */
+.section-title {
+  color: var(--primary-color);
+  margin-bottom: 25px;
+  font-size: 1.4em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.section-title i {
+  margin-right: 10px;
+}
+
+/* Button Styles */
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3634A6;
+  border-color: #3634A6;
+  transform: translateY(-2px);
+}
+
+.btn-light {
+  background-color: #f8f9fa;
+  border-color: #ddd;
+}
+
+.btn-light:hover {
+  background-color: #e2e6ea;
+  border-color: #ddd;
+}
+
+
+/* Success Message Styling */
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-size: 16px;
+  display: none;
+  align-items: center;
+  z-index: 2000;
+  box-shadow: var(--card-shadow);
+  animation: fadeOut 3s forwards;
+}
+
+.success-message i {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* Fade Out Animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-card,
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  .edit-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+  .dashboard-card .info-label,
+  .dashboard-card .info-value {
+    font-size: 14px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .edit-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Scrollbar Customization */
+.form-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.form-container::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+.form-container::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+}
+
+/* Additional Enhancements */
+.info-value {
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.dashboard-view .row {
+  margin: 0 -10px;
+}
+
+.dashboard-view .col-md-6, .col-md-4 {
+  padding: 10px;
+}
+</style>
+
+<!-- Dashboard View -->
+<div class="dashboard-view" id="dashboardView">
+  <!-- Personal Information Card -->
+  <div class="dashboard-card">
+    <button class="edit-button" onclick="toggleEdit()" title="Edit Profile">
+      <i class="fas fa-pencil-alt"></i>
+    </button>
+    <h5 class="section-title"><i class="fas fa-user-circle"></i> Personal Information</h5>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-user"></i> Name</div>
+        <div class="info-value">{{ user.name if user.name else 'Not provided' }}</div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-envelope"></i> Email</div>
+        <div class="info-value">{{ user.email if user.email else 'Not provided' }}</div>
+      </div>
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-phone"></i> Phone</div>
+        <div class="info-value">{{ user.phone if user.phone else 'Not provided' }}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-venus-mars"></i> Gender</div>
+        <div class="info-value">{{ user.gender if user.gender else 'Not provided' }}</div>
+      </div>      
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-calendar-alt"></i> Date of Birth</div>
+        <div class="info-value">{{ user.dob if user.dob else 'Not provided' }}</div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-calendar-check"></i> Year of Admission</div>
+        <div class="info-value">{{ user.startdate if user.startdate else 'Not provided' }}</div>
+     </div>
+     <div class="col-md-4">
+        <div class="info-label"><i class="fas fa-calendar-times"></i> Expected Year of Graduation</div>
+        <div class="info-value">{{ user.enddate if user.enddate else 'Not provided' }}</div>
+     </div>
+    </div>
+  </div>
+<!-- Career Information Card -->
+<div class="dashboard-card">
+  <h5 class="section-title"><i class="fas fa-briefcase"></i> Career Information</h5>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="info-label"><i class="fas fa-bullseye"></i> Career Goal</div>
+      <div class="info-value">{{ user.career_goal if user.career_goal else 'Not provided' }}</div>
+    </div>
+    <div class="col-md-6">
+      <div class="info-label"><i class="fas fa-building"></i> Dream Company</div>
+      <div class="info-value">{{ user.dream_company if user.dream_company else 'Not provided' }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="info-label"><i class="fas fa-rocket"></i> Interested in Entrepreneurship?</div>
+      <div class="info-value">{{ user.entrepreneurship_interest if user.entrepreneurship_interest else 'Not provided' }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="info-label"><i class="fas fa-industry"></i> Interested Industries</div>
+      <div class="info-value">{{ user.interested_industries if user.interested_industries else 'Not provided' }}</div>
+    </div>
+    <div class="col-md-6">
+      <div class="info-label"><i class="fas fa-exchange-alt"></i> Company Preference</div>
+      <div class="info-value">{{ user.company_preference if user.company_preference else 'Not provided' }}</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="info-label"><i class="fas fa-quote-left"></i> Personal Statement</div>
+      <div class="info-value">{{ user.personal_statement if user.personal_statement else 'Not provided' }}</div>
+    </div>
+  </div>
+</div>
+
+  <!-- Social Links Card -->
+  <div class="dashboard-card">
+    <h5 class="section-title"><i class="fas fa-link"></i> Social Links</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="info-label"><i class="fab fa-github"></i> GitHub</div>
+        <div class="info-value">{{ user.githubProfile if user.githubProfile else 'Not provided' }}</div>
+      </div>
+      <div class="col-md-6">
+        <div class="info-label"><i class="fab fa-linkedin"></i> LinkedIn</div>
+        <div class="info-value">{{ user.linkedinProfile if user.linkedinProfile else 'Not provided' }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Form Container -->
+<div class="form-container" id="formContainer">
+  <button class="close-form" onclick="toggleEdit()">
+    <i class="fas fa-times"></i>
+  </button>
+  <div class="form-wrapper">
+    <form action="/student_profile" method="post">
+      <!-- User Account Details -->
+      <div class="section-container">
+        <h5 class="section-title"><i class="fas fa-user-circle"></i> User Account Details</h5>
+        <div class="form-group">
+          <label for="exampleInputUsername1">Name</label>
+          <input type="text" class="form-control" id="exampleInputUsername1" name="name" value="{{ user.name if user.name else '' }}" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="email" value="{{ user.email if user.email else '' }}" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPhone">Phone Number</label>
+          <input type="tel" class="form-control" id="exampleInputPhone" name="phone" value="{{ user.phone if user.phone else '' }}" placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender" name="gender">
+              <option value="male" {% if user.gender == 'Male' %}selected{% endif %}>Male</option>
+              <option value="female" {% if user.gender == 'Female' %}selected{% endif %}>Female</option>              
+          </select>
+        </div>      
+        <div class="form-group">
+          <label for="exampleInputDOB">Date of Birth</label>
+          <input type="date" class="form-control" id="exampleInputDOB" name="dob" value="{{ user.dob if user.dob else '' }}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputJoiningDate">Start Date</label>
+          <input type="date" class="form-control" id="exampleInputJoiningDate" name="startdate" value="{{ user.startdate if user.startdate else '' }}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEndDate">End Date</label>
+          <input type="date" class="form-control" id="exampleInputEndDate" name="enddate" value="{{ user.enddate if user.enddate else '' }}">
+        </div>
+      </div>
+
+      <!-- Career Aspirations -->
+<!-- Personal Goals and Interests -->
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="section-container">
+        <h5>Career Aspirations</h5>
+        <div class="form-group">
+          <label for="careerAimGoal">What career do you aspire to pursue after graduation?</label>
+          <input type="text" class="form-control" id="careerAimGoal" name="career_goal" placeholder="e.g., Data Scientist, AI Engineer" value="{{ user.career_goal if user.career_goal else '' }}">
+        </div>
+        <div class="form-group">
+          <label for="entrepreneurshipInterest">Are you interested in entrepreneurship or starting your own business?</label>
+          <select class="form-control" id="entrepreneurshipInterest" name="entrepreneurship_interest">
+            <option value="yes" {% if user.entrepreneurship_interest == 'yes' %}selected{% endif %}>Yes</option>
+            <option value="no" {% if user.entrepreneurship_interest == 'no' %}selected{% endif %}>No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="interestedIndustries">What industries are you most curious about?</label>
+          <input type="text" class="form-control" id="interestedIndustries" name="interested_industries" placeholder="e.g., Technology, Healthcare" value="{{ user.interested_industries if user.interested_industries else '' }}">
+        </div>
+        <div class="form-group">
+          <label for="dreamCompany">Dream Company</label>
+          <input type="text" class="form-control" id="dreamCompany" name="dream_company" placeholder="e.g., Google, Tesla" value="{{ user.dream_company if user.dream_company else '' }}">
+        </div>
+        <div class="form-group">
+          <label for="companyPreference">Would you prefer to work for a service-based or product-based company?</label>
+          <select class="form-control" id="companyPreference" name="company_preference">
+            <option value="service" {% if user.company_preference == 'service' %}selected{% endif %}>Service-Based</option>
+            <option value="product" {% if user.company_preference == 'product' %}selected{% endif %}>Product-Based</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="personalStatement">Tell me briefly, in your own words, how I can assist you in achieving your dreams. I’m here to listen and help you on your journey.</label>
+          <textarea class="form-control" id="personalStatement" name="personal_statement" rows="3" placeholder="Your vision or motivation">{{ user.personal_statement if user.personal_statement else '' }}</textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Social Links -->
+      <div class="section-container">
+        <h5 class="section-title"><i class="fas fa-link"></i> Social Links</h5>
+        <div class="form-group">
+          <label for="githubProfile">GitHub Profile URL</label>
+          <input type="url" class="form-control" id="githubProfile" name="githubProfile" value="{{ user.githubProfile if user.githubProfile else '' }}" placeholder="https://github.com/username">
+        </div>
+        <div class="form-group">
+          <label for="linkedinProfile">LinkedIn Profile URL</label>
+          <input type="url" class="form-control" id="linkedinProfile" name="linkedinProfile" value="{{ user.linkedinProfile if user.linkedinProfile else '' }}" placeholder="https://linkedin.com/in/username">
+        </div>
+      </div>
+
+      <!-- Form Buttons -->
+      <div class="form-buttons">
+        <button type="submit" class="btn btn-primary mr-2">Save Changes</button>
+        <button type="button" class="btn btn-light" onclick="toggleEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Success Message -->
+<div id="successMessage" class="success-message">
+  <i class="fas fa-check-circle"></i>
+  Successfully updated your profile!
+</div>
+
+
+
+<script>
+
+
+
+function toggleEdit() {
+  const dashboardView = document.getElementById('dashboardView');
+  const formContainer = document.getElementById('formContainer');
+  
+  if (formContainer.classList.contains('active')) {
+    // Hide form
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      formContainer.classList.remove('active');
+      dashboardView.style.display = 'block';
+    }, 300);
+  } else {
+    // Show form
+    formContainer.classList.add('active');
+    dashboardView.style.display = 'none';
+    setTimeout(() => {
+      formContainer.style.opacity = '1';
+      formContainer.style.transform = 'translateY(0)';
+    }, 50);
+  }
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle form submission
+  const form = document.querySelector('form');
+  const successMessage = document.getElementById('successMessage');
+  
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('/student_profile', {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        // Success - show success message
+        successMessage.classList.add('show');
+        
+        // Hide form and refresh dashboard
+        toggleEdit();
+        setTimeout(() => {
+          successMessage.classList.remove('show');
+          window.location.reload();
+        }, 3000); // Hide the success message after 3 seconds
+      } else {
+        alert('Error updating profile. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error updating profile. Please try again.');
+    }
+  });
+
+  // Close form on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('formContainer').classList.contains('active')) {
+      toggleEdit();
+    }
+  });
+});
+
+
+
+// Add styles for the success message popup
+const styles = `
+.success-message {
+  display: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.success-message i {
+  margin-right: 8px;
+}
+`;
+
+// Add the styles to the document
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+// Function to show the success message
+function showSuccessMessage() {
+  const successMessage = document.getElementById('successMessage');
+  successMessage.style.display = 'block';
+  
+  // Hide the message after 3 seconds
+  setTimeout(() => {
+    successMessage.style.display = 'none';
+  }, 3000);
+}
+
+// Handle form submission
+document.querySelector('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  try {
+    const formData = new FormData(e.target);
+    const response = await fetch('/student_profile', {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      showSuccessMessage();
+      toggleEdit(); // Close the form
+    } else {
+      throw new Error('Failed to update profile');
+    }
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    // Optionally show an error message to the user
+  }
+});
+
+</script>
+{% endblock %}

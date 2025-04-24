@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendors/feather/feather.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendors/ti-icons/css/themify-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendors/css/vendor.bundle.base.css') }}">
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/vertical-layout-light/style.css') }}">
+  <!-- endinject -->  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">        
+  <link rel="icon" href="{{ url_for('static', filename='Images/PBSC - Ignite-Bulb.png') }}" type="image/x-icon">
+  <title>{% block title %}PBSC-Ignite{% endblock %}</title>  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- Top navbar -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo mr-5" href="/"><img src="{{ url_for('static', filename='Images/PBSC - Ignite.png') }}" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ url_for('static', filename='Images/PBSC - Ignite-Bulb.png') }}" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-bell mx-0"></i>
+              <span class="count" id="notification-count"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" id="notification-list">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
+              <!-- Notifications will be loaded here -->
+            </div>
+          </li>
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">                                                            
+              <img src="{{ url_for('static', filename='Images/Profile-Image.jpg') }}" alt="Profile"/>
+            </a>          
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="/student_profile">
+                <i class="ti-settings text-primary"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="/logout">
+                <i class="ti-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/" title="Go to Home">
+              <i class="bi bi-house-door" style="margin-right: 8px;"></i> 
+              <span class="menu-title">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="bi bi-book" style="margin-right: 8px;"></i>
+              <span class="menu-title">Learning</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/resources" title="View Resources">Resources</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/news-articles" title="Stay Updated with Tech News">Tech News</a></li>                
+              </ul>
+            </div>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="bi bi-person-circle" style="margin-right: 8px;"></i>
+              <span class="menu-title">Community</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/student_profile" title="Your Profile">Student Profile</a></li>                
+                <li class="nav-item"><a class="nav-link" href="/alumni" title="Alumni Network">Alumni</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/road-map">
+              <i class="fa-solid fa-map" style="margin-right: 8px;"></i>
+              <span class="menu-title">Roadmap</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/your-career_coach-leo011">
+              <i class="bi bi-robot" style="margin-right: 8px;"></i>
+              <span class="menu-title">Career Coach (Leo Bot)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- Main Content -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+      <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2025 <a href="/">PBSC-Ignite (PBSCI-V1.0)</a>. Developed by <a href="https://www.linkedin.com/in/abdulfaheem011/" target="_blank">Abdul Faheem - (The Leo Programmer - 011)</a>.</span>
+    <div class="team-section mt-3 text-center">
+      <p class="mb-0">
+        An AF's Endeavor Developed with <span style="font-size: 1.5em;">🥤</span> and <span style="font-size: 1.5em;">💡</span>.
+      </p>
+      </p>
+    </div>
+  </footer>
+  
+
+
+  <!-- plugins:js -->
+  <script src="{{ url_for('static', filename='vendors/js/vendor.bundle.base.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/off-canvas.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/hoverable-collapse.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/template.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    function fetchNotifications() {
+        fetch('/get_notifications')
+            .then(response => response.json())
+            .then(notifications => {
+                const list = document.getElementById('notification-list');
+                const count = document.getElementById('notification-count');
+                
+                count.textContent = notifications.length;
+                list.innerHTML = '<p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>';
+                
+                notifications.forEach(n => {
+                    const item = `
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-${n.completed ? 'success' : 'warning'}">
+                                    <i class="ti-calendar mx-0"></i>
+                                </div>
+                            </div>
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-normal">${n.message}</h6>
+                                <p class="font-weight-light small-text mb-0 text-muted">
+                                    ${new Date(n.created_at).toLocaleString()}
+                                </p>
+                            </div>
+                        </a>`;
+                    list.insertAdjacentHTML('beforeend', item);
+                });
+            });
+    }
+    
+    setInterval(fetchNotifications, 60000);
+    fetchNotifications();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Roadmap - Career Development
+{% endblock %}
+
+{% block content %}
+<div class="container my-2">
+   <div class="row">
+       <div class="col-md-12 text-center">
+           <h2>Hey <strong>{{ user.name }}</strong>, buckle up! 🚀 Here comes your epic roadmap to success!</h2>
+           <p class="lead">Follow these steps and let's make your journey unforgettable. Ready? Let's go!</p>
+       </div>
+
+       <div class="timeline my-5">
+           {% for phase in roadmap_data.phases %}
+               {% set total_days = namespace(value=0) %}
+               {% set completed_days = namespace(value=0) %}
+               
+               {% if phase.get('learning_plan') %}
+                   {% for week in phase.learning_plan.weekly_schedule %}
+                       {% for task in week.daily_tasks %}
+                           {% set total_days.value = total_days.value + 1 %}
+                           {% if task.completed %}
+                               {% set completed_days.value = completed_days.value + 1 %}
+                           {% endif %}
+                       {% endfor %}
+                   {% endfor %}
+               {% endif %}
+
+               {% set progress = (completed_days.value / total_days.value * 100)|round if total_days.value > 0 else 0 %}
+
+               <div class="container-item {% if loop.index % 2 == 0 %}right{% else %}left{% endif %}">
+                   <div class="content">
+                       <div class="d-flex justify-content-between align-items-center">
+                           <h2>{{ phase.name }}</h2>
+                           <span class="badge bg-{{ 'success' if progress == 100 else 'warning' }}">
+                               {{ progress }}% Complete
+                           </span>
+                       </div>
+                       <span class="duration">{{ phase.duration }}</span>
+                       
+                       <div class="progress mt-2" style="height: 10px;">
+                           <div class="progress-bar bg-{{ 'success' if progress == 100 else 'primary' }}" 
+                                role="progressbar" 
+                                style="width: {{ progress }}%;" 
+                                aria-valuenow="{{ progress }}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                           </div>
+                       </div>
+
+                       <p class="mt-3">{{ phase.description }}</p>
+                       <div class="skills">
+                           {% for skill in phase.skills %}
+                               <span class="skill">{{ skill }}</span>
+                           {% endfor %}
+                       </div>
+                       
+                       <div class="resources">
+                           <h3>Learning Resources:</h3>
+                           {% for category, items in phase.resources.items() %}
+                               <div class="resource-item">
+                                   <div>
+                                       <strong>{{ category }}:</strong>
+                                       {{ items|join(' • ') }}
+                                   </div>
+                               </div>
+                           {% endfor %}
+                       </div>
+
+                       {% if progress < 100 %}
+                           <button onclick="startModule('{{loop.index0}}')" class="btn btn-primary mt-3">
+                               {% if total_days.value > 0 %}Continue Module{% else %}Start Module{% endif %}
+                           </button>
+                       {% else %}
+                           <button class="btn btn-success mt-3" disabled>Completed</button>
+                       {% endif %}
+                   </div>
+               </div>
+           {% endfor %}
+       </div>
+   </div>
+</div>
+
+<style>
+   .container {
+       max-width: 1200px;
+       margin: 0 auto;
+   }
+
+   .timeline {
+       position: relative;
+       max-width: 1200px;
+       margin: 0 auto;
+   }
+
+   .timeline::after {
+       content: '';
+       position: absolute;
+       width: 6px;
+       background-color: #4299e1;
+       top: 0;
+       bottom: 0;
+       left: 50%;
+       margin-left: -3px;
+       border-radius: 3px;
+       animation: growLine 2s ease-out forwards;
+   }
+
+   @keyframes growLine {
+       from { transform: scaleY(0); }
+       to { transform: scaleY(1); }
+   }
+
+   .container-item {
+       padding: 10px 40px;
+       position: relative;
+       width: 50%;
+       opacity: 0;
+       animation: fadeIn 0.5s ease-out forwards;
+   }
+
+   @keyframes fadeIn {
+       from {
+           opacity: 0;
+           transform: translateY(20px);
+       }
+       to {
+           opacity: 1;
+           transform: translateY(0);
+       }
+   }
+
+   .container-item:nth-child(odd) { left: 0; }
+   .container-item:nth-child(even) { left: 50%; }
+
+   .content {
+       padding: 20px;
+       background-color: white;
+       position: relative;
+       border-radius: 8px;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+       transition: all 0.3s ease;
+   }
+
+   .content:hover {
+       transform: translateY(-5px);
+       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+   }
+
+   .content h2 {
+       color: #2b6cb0;
+       margin-bottom: 0.5rem;
+       font-size: 1.5rem;
+   }
+
+   .duration {
+       display: inline-block;
+       background: #4299e1;
+       color: white;
+       padding: 0.25rem 0.75rem;
+       border-radius: 15px;
+       font-size: 0.9rem;
+       margin-bottom: 1rem;
+   }
+
+   .progress {
+       background-color: #e9ecef;
+       border-radius: 0.25rem;
+   }
+
+   .progress-bar {
+       transition: width 0.6s ease;
+   }
+
+   .skills {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 0.5rem;
+       margin-top: 1rem;
+   }
+
+   .skill {
+       background: #ebf4ff;
+       padding: 0.5rem 1rem;
+       border-radius: 20px;
+       font-size: 0.9rem;
+       color: #4a5568;
+   }
+
+   .resources {
+       margin-top: 1rem;
+       padding-top: 1rem;
+       border-top: 1px solid #e2e8f0;
+   }
+
+   .resource-item {
+       margin-bottom: 0.5rem;
+       padding: 0.5rem;
+       background: #f7fafc;
+       border-radius: 4px;
+   }
+
+   .container-item:nth-child(1) { animation-delay: 0.2s; }
+   .container-item:nth-child(2) { animation-delay: 0.4s; }
+   .container-item:nth-child(3) { animation-delay: 0.6s; }
+   .container-item:nth-child(4) { animation-delay: 0.8s; }
+
+   @media (max-width: 768px) {
+       .timeline::after { left: 31px; }
+       .container-item { width: 100%; left: 0; }
+       .content { margin: 0 0 0 70px; }
+   }
+</style>
+
+<script>
+   function startModule(phaseId) {
+       fetch(`/generate-plan/${phaseId}`, {
+           method: 'POST',
+           credentials: 'same-origin',
+           headers: {
+               'Content-Type': 'application/json'
+           }
+       })
+       .then(response => response.json())
+       .then(data => {
+           if(data.status === 'success') {
+               window.location.href = `/learning-plan/${phaseId}`;
+           } else if(data.status === 'exists') {
+               window.location.href = `/learning-plan/${phaseId}`;
+           } else {
+               alert('Error: ' + data.message);
+           }
+       })
+       .catch(error => {
+           console.error("Error:", error);
+           alert('Error: ' + error);
+       });
+   }
+</script>
+{% endblock %}

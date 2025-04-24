@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign In - (PBSC-Ignite)
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center py-5">
+    <h1 class="display-4">Welcome to PBSC-Ignite</h1>
+    <p class="lead mb-0">AI-Driven Career Readiness Platform.</p>
+
+    <!-- Error Message -->
+    {% if message %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-center bg-success-subtle">
+                    <h4 class="text-dark">Login to your Account</h4>
+                </div>
+                <div class="card-body">
+
+                    <!-- Error Message -->
+                    {% if error %}
+                    <div class="alert alert-danger text-center" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+
+                    <form action="/sign_in" method="post">
+                        
+                        <!-- Username / Email -->
+                        <div class="mb-3 position-relative">
+                            <label for="username" class="form-label">Username / Email</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-user"></i>  <!-- User Icon -->
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username / Email" required>
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3 position-relative">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-key"></i> <!-- Key Icon -->
+                                </div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">
+                        Don’t have an account? <a href='/sign_up' class='text-decoration-none'>Sign up here</a>.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Learning Plan - {{ phase.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Learning Plan: {{ phase.name }}</h2>
+                <a href="{{ url_for('roadmap_bp.roadmap') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Roadmap
+                </a>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">Phase Description</h3>
+                </div>
+                <div class="card-body">
+                    <p>{{ phase.description }}</p>
+                    <div class="skills d-flex flex-wrap gap-2 mt-3">
+                        {% for skill in phase.skills %}
+                            <span class="badge bg-secondary">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="learning-plan">
+                {% for week in phase.learning_plan.weekly_schedule %}
+                    {% set weekIndex = loop.index0 %}
+                    <div class="card mb-4 week-card">
+                        <div class="card-header bg-primary text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3 class="mb-0">Week {{ week.week }}</h3>
+                                
+                                <!-- New: AI Tutor Button -->
+                                <a href="{{ url_for('tutor_bp.tutor_page', phase_id=phase_id, module_id=week.week) }}" class="btn btn-light">
+                                    <i class="fas fa-robot"></i> AI Tutor for Week {{ week.week }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="learning-objectives mb-4">
+                                <h4 class="text-primary">Learning Objectives</h4>
+                                <ul class="list-group list-group-flush">
+                                    {% for objective in week.learning_objectives %}
+                                        <li class="list-group-item">{{ objective }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                            <div class="daily-tasks">
+                                <h4 class="text-primary">Daily Tasks</h4>
+                                
+                                <!-- Task Completion Progress -->
+                                {% set total_tasks = week.daily_tasks|length %}
+                                {% set completed_tasks = 0 %}
+                                {% for task in week.daily_tasks %}
+                                    {% if task.completed %}
+                                        {% set completed_tasks = completed_tasks + 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                
+                                {% set progress = (completed_tasks / total_tasks * 100)|round if total_tasks > 0 else 0 %}
+                                
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Progress: {{ completed_tasks }}/{{ total_tasks }} tasks completed</span>
+                                    <span class="badge bg-{{ 'success' if progress == 100 else 'primary' }}">{{ progress }}%</span>
+                                </div>
+                                
+                                <div class="progress mb-4" style="height: 10px;">
+                                    <div class="progress-bar bg-{{ 'success' if progress == 100 else 'primary' }}" 
+                                         role="progressbar" 
+                                         style="width: {{ progress }}%;" 
+                                         aria-valuenow="{{ progress }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                                
+                                <!-- Tasks Table -->
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Tasks</th>
+                                                <th>Resources</th>
+                                                <th>Duration</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for task in week.daily_tasks %}
+                                                {% set dayIndex = loop.index0 %}
+                                                <tr>
+                                                    <td>Day {{ task.day }}</td>
+                                                    <td>
+                                                        <ul class="mb-0 ps-3">
+                                                            {% for task_item in task.tasks %}
+                                                                <li>{{ task_item }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="mb-0 ps-3">
+                                                            {% for resource in task.resources %}
+                                                                <li>{{ resource }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ task.duration_hours }} hours</td>
+                                                    <td>
+                                                        <div class="form-check form-switch">
+                                                            <input class="form-check-input task-checkbox" 
+                                                                   type="checkbox" 
+                                                                   role="switch" 
+                                                                   id="taskCheck_{{ week.week }}_{{ task.day }}"
+                                                                   data-week="{{ weekIndex }}"
+                                                                   data-day="{{ dayIndex }}"
+                                                                   {% if task.completed %}checked{% endif %}>
+                                                            <label class="form-check-label" for="taskCheck_{{ week.week }}_{{ task.day }}">
+                                                                {{ 'Completed' if task.completed else 'Mark as completed' }}
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Weekly Assessment -->
+                            <div class="assessment mt-4">
+                                <h4 class="text-primary">Weekly Assessment</h4>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>{{ week.assessment }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all task checkboxes
+        const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+        
+        // Add event listener to each checkbox
+        taskCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const weekIndex = this.getAttribute('data-week');
+                const dayIndex = this.getAttribute('data-day');
+                const completed = this.checked;
+                
+                // Update the label text
+                const label = this.nextElementSibling;
+                label.textContent = completed ? 'Completed' : 'Mark as completed';
+                
+                // Send update to server
+                fetch('/complete-task', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phase_id: '{{ phase_id }}',
+                        week_index: weekIndex,
+                        day_index: dayIndex,
+                        completed: completed
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status !== 'success') {
+                        console.error('Error updating task:', data.message);
+                        alert('Error updating task. Please try again.');
+                        
+                        // Revert the checkbox state
+                        this.checked = !completed;
+                        label.textContent = !completed ? 'Completed' : 'Mark as completed';
+                    } else {
+                        // Refresh the page to update progress bars
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error updating task. Please try again.');
+                    
+                    // Revert the checkbox state
+                    this.checked = !completed;
+                    label.textContent = !completed ? 'Completed' : 'Mark as completed';
+                });
+            });
+        });
+    });
+</script>
+
+<style>
+    .week-card {
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+    }
+    
+    .week-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .card-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .text-primary {
+        color: #2b6cb0 !important;
+    }
+    
+    .list-group-item {
+        border-left: none;
+        border-right: none;
+        padding: 0.75rem 0;
+    }
+    
+    .progress {
+        height: 0.5rem;
+        border-radius: 0.25rem;
+        background-color: #e9ecef;
+    }
+    
+    .skills .badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 1rem;
+    }
+    
+    .assessment .card {
+        border-left: 5px solid #4299e1;
+    }
+</style>
+{% endblock %}

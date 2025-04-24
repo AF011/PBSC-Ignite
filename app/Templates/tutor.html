@@ -1,0 +1,634 @@
+{% extends 'base.html' %}
+
+{% block title %}
+AI Tutor - {{ topic }}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid my-3">
+    <div class="row">
+        <!-- Left sidebar with module info -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Module Information</h5>
+                </div>
+                <div class="card-body">
+                    <h6>{{ phase.name }}</h6>
+                    <span class="badge bg-info">Week {{ module.week }}</span>
+                    
+                    <div class="mt-3">
+                        <h6>Learning Objectives:</h6>
+                        <ul class="ps-3">
+                            {% for objective in module.learning_objectives %}
+                                <li>{{ objective }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <h6>Key Skills:</h6>
+                        <div class="d-flex flex-wrap gap-1">
+                            {% for skill in phase.skills %}
+                                <span class="badge bg-secondary">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <button class="btn btn-outline-secondary btn-sm w-100 mb-2" id="btnClearChat">
+                        <i class="fas fa-trash-alt"></i> Clear Chat History
+                    </button>
+                    
+                    <a href="{{ url_for('roadmap_bp.roadmap') }}" class="btn btn-outline-primary btn-sm w-100">
+                        <i class="fas fa-arrow-left"></i> Back to Roadmap
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Resources Section with scrollbar -->
+            <div class="card mt-3">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Learning Resources</h5>
+                    <button class="btn btn-sm btn-light" id="btnRefreshResources">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="card-body p-0">
+                    <ul class="nav nav-tabs" id="resourceTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button" role="tab" aria-controls="videos" aria-selected="true">Videos</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="papers-tab" data-bs-toggle="tab" data-bs-target="#papers" type="button" role="tab" aria-controls="papers" aria-selected="false">Papers</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web" type="button" role="tab" aria-controls="web" aria-selected="false">Web</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="resourceTabsContent">
+                        <div class="tab-pane fade show active resources-scrollable" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+                            <div class="text-center py-3" id="videosLoading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading videos...</p>
+                            </div>
+                            <div id="videosList" class="p-3"></div>
+                        </div>
+                        <div class="tab-pane fade resources-scrollable" id="papers" role="tabpanel" aria-labelledby="papers-tab">
+                            <div class="text-center py-3" id="papersLoading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading papers...</p>
+                            </div>
+                            <div id="papersList" class="p-3"></div>
+                        </div>
+                        <div class="tab-pane fade resources-scrollable" id="web" role="tabpanel" aria-labelledby="web-tab">
+                            <div class="text-center py-3" id="webLoading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading web resources...</p>
+                            </div>
+                            <div id="webList" class="p-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">AI Tutor - {{ topic }}</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Chat Messages Container -->
+                    <div id="chatContainer" class="chat-container mb-3">
+                        {% if chat_history|length > 0 %}
+                            {% for message in chat_history %}
+                                <div class="chat-message {{ 'user-message' if message.role == 'user' else 'ai-message' }}">
+                                    <div class="message-content" data-formatted="false">
+                                        {{ message.content|safe }}
+                                    </div>
+                                    <div class="message-timestamp small text-muted">
+                                        {{ message.timestamp.strftime('%Y-%m-%d %H:%M') if message.timestamp else 'Unknown time' }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="chat-message ai-message">
+                                <div class="message-content">
+                                    <p>👋 Hi there! I'm your AI tutor for <strong>{{ topic }}</strong>.</p>
+                                    <p>I'm here to help you understand the concepts, answer your questions, and guide you through this learning module. Feel free to ask me anything about:</p>
+                                    <ul>
+                                        {% for objective in module.learning_objectives %}
+                                            <li>{{ objective }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <p>What would you like to learn about today?</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Typing indicator -->
+                    <div id="typingIndicator" class="chat-message ai-message typing-indicator d-none">
+                        <div class="message-content">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Input Form -->
+                    <form id="chatForm" class="chat-form d-flex gap-2">
+                        <input type="text" id="messageInput" class="form-control" placeholder="Type your question here..." required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chat-container {
+        height: calc(100vh - 300px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .chat-message {
+        max-width: 85%;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+    
+    .user-message {
+        align-self: flex-end;
+        background-color: #DCF8C6;
+        margin-left: auto;
+        border-bottom-right-radius: 0.25rem;
+    }
+    
+    .ai-message {
+        align-self: flex-start;
+        background-color: #F1F0F0;
+        margin-right: auto;
+        border-bottom-left-radius: 0.25rem;
+    }
+    
+    .message-content {
+        word-wrap: break-word;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0;
+    }
+    
+    .message-timestamp {
+        text-align: right;
+        margin-top: 0.25rem;
+    }
+    
+    .typing-indicator {
+        padding: 0.5rem 1rem;
+    }
+    
+    .typing-dots {
+        display: flex;
+        align-items: center;
+    }
+    
+    .typing-dots span {
+        height: 8px;
+        width: 8px;
+        margin: 0 1px;
+        background-color: #777;
+        border-radius: 50%;
+        display: inline-block;
+        animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dots span:nth-child(1) {
+        animation-delay: 0s;
+    }
+    
+    .typing-dots span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    
+    .typing-dots span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    
+    @keyframes typing {
+        0% {
+            transform: translateY(0px);
+            background-color: #777;
+        }
+        25% {
+            transform: translateY(-5px);
+            background-color: #555;
+        }
+        50% {
+            transform: translateY(0px);
+            background-color: #777;
+        }
+    }
+    
+    /* Resource cards styling */
+    .resource-card {
+        margin-bottom: 1rem;
+        transition: all 0.2s ease;
+    }
+    
+    .resource-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .video-thumbnail {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+    
+    .resource-card .card-body {
+        padding: 0.75rem;
+    }
+    
+    .resource-card .card-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+    
+    .resource-meta {
+        font-size: 0.8rem;
+        color: #666;
+    }
+    /* Resource scrollable area */
+    .resources-scrollable {
+        max-height: 450px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    
+    /* Custom scrollbar styling for Webkit browsers */
+    .resources-scrollable::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .resources-scrollable::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    .resources-scrollable::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+    }
+    
+    .resources-scrollable::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const messageInput = document.getElementById('messageInput');
+        const chatForm = document.getElementById('chatForm');
+        const chatContainer = document.getElementById('chatContainer');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const btnClearChat = document.getElementById('btnClearChat');
+        const btnRefreshResources = document.getElementById('btnRefreshResources');
+        
+        // Phase and module IDs for API calls
+        const phaseId = '{{ phase_id }}';
+        const moduleId = '{{ module_id }}';
+        const topic = '{{ topic }}';
+        
+        // Scroll chat to bottom
+        function scrollToBottom() {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        // Initialize by scrolling to bottom and loading resources
+        scrollToBottom();
+        loadResources();
+
+        if (typeof hljs !== 'undefined') {
+            hljs.highlightAll();
+        }
+        
+        // Handle chat form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // Add user message to chat
+            addMessageToChat('user', message);
+            
+            // Clear input
+            messageInput.value = '';
+            
+            // Show typing indicator
+            typingIndicator.classList.remove('d-none');
+            scrollToBottom();
+            
+            // Send message to API
+            fetch('/api/tutor/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    phase_id: phaseId,
+                    module_id: moduleId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide typing indicator
+                typingIndicator.classList.add('d-none');
+                
+                if (data.status === 'success') {
+                    // Add AI response to chat
+                    addMessageToChat('assistant', data.response);
+                } else {
+                    // Add error message
+                    addMessageToChat('assistant', 'Sorry, I encountered an error. Please try again.');
+                    console.error('Error:', data.message);
+                }
+            })
+            .catch(error => {
+                // Hide typing indicator
+                typingIndicator.classList.add('d-none');
+                
+                // Add error message
+                addMessageToChat('assistant', 'Sorry, I encountered an error. Please try again.');
+                console.error('Error:', error);
+            });
+        });
+        
+        // Add message to chat
+        function addMessageToChat(role, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.classList.add(role === 'user' ? 'user-message' : 'ai-message');
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.classList.add('message-content');
+            contentDiv.innerHTML = formatMessage(content);
+            
+            const timestampDiv = document.createElement('div');
+            timestampDiv.classList.add('message-timestamp', 'small', 'text-muted');
+            
+            const now = new Date();
+            const formattedDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')} ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            timestampDiv.textContent = formattedDate;
+            
+            messageDiv.appendChild(contentDiv);
+            messageDiv.appendChild(timestampDiv);
+            
+            chatContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function formatMessage(message) {
+            if (!message) return '';
+            
+            // Replace markdown code blocks with proper HTML
+            message = message.replace(/```(\w*)([\s\S]*?)```/g, function(match, language, code) {
+                return `<pre><code class="language-${language || 'plaintext'}">${code.trim()}</code></pre>`;
+            });
+            
+            // Replace markdown inline code
+            message = message.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Add markdown support for bold text
+            message = message.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            
+            // Add markdown support for italic text
+            message = message.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            
+            // Add markdown support for headers (h3, h4 only since h1, h2 would be too large)
+            message = message.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+            message = message.replace(/^#### (.*?)$/gm, '<h4>$1</h4>');
+            
+            // Add markdown support for lists
+            // Unordered lists
+            message = message.replace(/^- (.*?)$/gm, '<li>$1</li>');
+            message = message.replace(/(<li>.*?<\/li>)\n(<li>.*?<\/li>)/gs, '<ul>$1$2</ul>');
+            
+            // Ordered lists
+            message = message.replace(/^\d+\. (.*?)$/gm, '<li>$1</li>');
+            message = message.replace(/(<li>.*?<\/li>)\n(<li>.*?<\/li>)/gs, '<ol>$1$2</ol>');
+            
+            // Handle line breaks
+            message = message.replace(/\n/g, '<br>');
+            
+            return message;
+        }
+        
+        // When rendering existing chat history, format all messages
+        document.querySelectorAll('.message-content').forEach(function(el) {
+            if (el.getAttribute('data-formatted') !== 'true') {
+                const content = el.innerHTML;
+                el.innerHTML = formatMessage(content);
+                el.setAttribute('data-formatted', 'true');
+            }
+        });
+        
+        // Clear chat history
+        btnClearChat.addEventListener('click', function() {
+            if (confirm('Are you sure you want to clear the chat history? This cannot be undone.')) {
+                fetch('/api/tutor/clear-history', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phase_id: phaseId,
+                        module_id: moduleId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Clear chat container
+                        chatContainer.innerHTML = '';
+                        
+                        // Add welcome message
+                        const welcomeMessage = `
+                            <p>👋 Hi there! I'm your AI tutor for <strong>${topic}</strong>.</p>
+                            <p>I'm here to help you understand the concepts, answer your questions, and guide you through this learning module. What would you like to learn about today?</p>
+                        `;
+                        addMessageToChat('assistant', welcomeMessage);
+                    } else {
+                        alert('Error clearing chat history: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error clearing chat history');
+                });
+            }
+        });
+        
+        // Load resources
+        // Load resources function with debugging and improved error handling
+        function loadResources() {
+            console.log("Starting to load resources for topic:", topic);
+            
+            // Show loading spinners
+            document.getElementById('videosLoading').classList.remove('d-none');
+            document.getElementById('papersLoading').classList.remove('d-none');
+            document.getElementById('webLoading').classList.remove('d-none');
+            
+            // Clear previous resources
+            document.getElementById('videosList').innerHTML = '';
+            document.getElementById('papersList').innerHTML = '';
+            document.getElementById('webList').innerHTML = '';
+            
+            // Make API request
+            console.log(`Fetching resources from: /api/tutor/resources?topic=${encodeURIComponent(topic)}&type=all`);
+            
+            fetch(`/api/tutor/resources?topic=${encodeURIComponent(topic)}&type=all`)
+                .then(response => {
+                    console.log("API Response status:", response.status);
+                    return response.json().catch(error => {
+                        console.error("Error parsing JSON:", error);
+                        throw new Error("Failed to parse API response");
+                    });
+                })
+                .then(data => {
+                    console.log("API Response data:", data);
+                    
+                    // Hide loading spinners
+                    document.getElementById('videosLoading').classList.add('d-none');
+                    document.getElementById('papersLoading').classList.add('d-none');
+                    document.getElementById('webLoading').classList.add('d-none');
+                    
+                    if (data.status === 'success') {
+                        // Populate videos
+                        const videosList = document.getElementById('videosList');
+                        if (data.resources.youtube && data.resources.youtube.length > 0) {
+                            console.log(`Found ${data.resources.youtube.length} videos`);
+                            data.resources.youtube.forEach(video => {
+                                videosList.innerHTML += `
+                                    <div class="card resource-card">
+                                        <img src="${video.thumbnail}" class="video-thumbnail" alt="${video.title}">
+                                        <div class="card-body">
+                                            <h6 class="card-title">${video.title}</h6>
+                                            <div class="resource-meta">
+                                                <i class="fas fa-user"></i> ${video.channelTitle}
+                                            </div>
+                                            <a href="${video.url}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Watch</a>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            console.log("No videos found in response");
+                            videosList.innerHTML = '<p class="text-muted">No videos found</p>';
+                        }
+                        
+                        // Populate papers
+                        const papersList = document.getElementById('papersList');
+                        console.log("Papers data:", data.resources.papers);
+                        
+                        if (data.resources.papers && data.resources.papers.length > 0) {
+                            console.log(`Found ${data.resources.papers.length} papers`);
+                            data.resources.papers.forEach(paper => {
+                                // Safety check for authors array
+                                let authorsText = 'Unknown';
+                                if (paper.authors && Array.isArray(paper.authors)) {
+                                    authorsText = paper.authors.join(', ');
+                                }
+                                
+                                papersList.innerHTML += `
+                                    <div class="card resource-card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">${paper.title}</h6>
+                                            <div class="resource-meta">
+                                                <i class="fas fa-users"></i> ${authorsText}
+                                                <br>
+                                                <i class="fas fa-calendar"></i> ${paper.year}
+                                                <i class="fas fa-quote-right ms-2"></i> ${paper.citations} citations
+                                            </div>
+                                            <a href="${paper.url}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Read Paper</a>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            console.log("No papers found in response");
+                            papersList.innerHTML = '<p class="text-muted">No papers found</p>';
+                        }
+                        
+                        // Populate web resources
+                        const webList = document.getElementById('webList');
+                        if (data.resources.web && data.resources.web.length > 0) {
+                            console.log(`Found ${data.resources.web.length} web resources`);
+                            data.resources.web.forEach(resource => {
+                                webList.innerHTML += `
+                                    <div class="card resource-card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">${resource.title}</h6>
+                                            <p class="small">${resource.snippet}</p>
+                                            <div class="resource-meta">
+                                                <i class="fas fa-globe"></i> ${resource.displayLink}
+                                            </div>
+                                            <a href="${resource.link}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Visit</a>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                        } else {
+                            console.log("No web resources found in response");
+                            webList.innerHTML = '<p class="text-muted">No web resources found</p>';
+                        }
+                    } else {
+                        console.error("API returned error status:", data.message);
+                        
+                        // Show error message
+                        document.getElementById('videosList').innerHTML = '<p class="text-danger">Error loading resources</p>';
+                        document.getElementById('papersList').innerHTML = '<p class="text-danger">Error loading resources</p>';
+                        document.getElementById('webList').innerHTML = '<p class="text-danger">Error loading resources</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                    
+                    // Hide loading spinners
+                    document.getElementById('videosLoading').classList.add('d-none');
+                    document.getElementById('papersLoading').classList.add('d-none');
+                    document.getElementById('webLoading').classList.add('d-none');
+                    
+                    // Show error message
+                    document.getElementById('videosList').innerHTML = '<p class="text-danger">Error loading resources: ' + error.message + '</p>';
+                    document.getElementById('papersList').innerHTML = '<p class="text-danger">Error loading resources</p>';
+                    document.getElementById('webList').innerHTML = '<p class="text-danger">Error loading resources</p>';
+                });
+        }
+        
+        // Refresh resources button
+        btnRefreshResources.addEventListener('click', loadResources);
+    });
+</script>
+{% endblock %}

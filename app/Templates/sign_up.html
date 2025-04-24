@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign Up - (PBSC-Ignite)
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center py-5">
+    <h1 class="display-4">Welcome to PBSC-Ignite</h1>
+    <p class="lead mb-0">AI-Driven Career Readiness Platform.</p>
+
+    <!-- Error Message -->
+    {% if message %}
+    <div class="alert alert-danger text-center" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+</div>
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-center bg-success-subtle">
+                    <h4 class="text-dark">Create Your Account</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Error Message -->
+                    {% if error %}
+                    <div class="alert alert-danger text-center" role="alert">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <form action="/sign_up" method="post">
+                        <!-- Username -->
+                        <div class="mb-3 position-relative">
+                            <label for="username" class="form-label">Username</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-user"></i>  <!-- User Icon -->
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" required>
+                            </div>
+                        </div>
+
+                        <!-- Name -->
+                        <div class="mb-3 position-relative">
+                            <label for="name" class="form-label">Name</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-user-tag"></i>  <!-- Name Icon -->
+                                </div>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name" required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3 position-relative">
+                            <label for="email" class="form-label">Email address</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-envelope"></i>  <!-- Email Icon -->
+                                </div>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="mb-3 position-relative">
+                            <label for="exampleInputPhone" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-phone"></i> <!-- Phone Icon -->
+                                </div>
+                                <input type="tel" class="form-control" id="exampleInputPhone" name="phone" placeholder="Enter your phone number" required>
+                            </div>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="mb-3 position-relative">
+                            <label for="exampleInputDOB" class="form-label">Date of Birth</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-calendar-alt"></i> <!-- Calendar Icon -->
+                                </div>
+                                <input type="date" class="form-control" id="exampleInputDOB" name="dob" required>
+                            </div>
+                        </div>
+
+
+                        
+
+                        <!-- Password -->
+                        <div class="mb-3 position-relative">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-key"></i>  <!-- Key Icon -->
+                                </div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mb-3 position-relative">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <div class="input-group-text">
+                                    <i class="fas fa-lock"></i>  <!-- Lock Icon -->
+                                </div>
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <small class="text-muted">
+                        Already have an account? <a href="/sign_in" class="text-decoration-none">Log in here</a>.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
