@@ -198,6 +198,5 @@ This project is licensed under the MIT License with additional terms - see the [
 
 ---
 
-<<<<<<< HEAD
 *An AF's Endeavor Developed with 🥤 and 💡*
 =======
