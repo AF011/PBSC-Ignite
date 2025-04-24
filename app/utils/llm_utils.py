@@ -206,7 +206,7 @@ def fetch_linkedin_profile(linkedin_url, user_id):
     url = "https://linkedin-data-api.p.rapidapi.com/get-profile-data-by-url"
     querystring = {"url": linkedin_url}
     headers = {
-        'x-rapidapi-key': os.getenv("LINKEDIN_API_KEY", "9ac9ae8123mshf8493c7d86c01bap1d40a5jsn33fb267e423a"),
+        'x-rapidapi-key': os.getenv("LINKEDIN_API_KEY"),
         "x-rapidapi-host": "linkedin-data-api.p.rapidapi.com"
     }    
 
