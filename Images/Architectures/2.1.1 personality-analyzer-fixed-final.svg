@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 550">
+  <!-- Background -->
+  <rect width="820" height="550" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="410" y="40" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#333">Personality Analyzer &amp; Data Collector</text>
+  
+  <!-- Student Input Section -->
+  <rect x="50" y="100" width="200" height="240" rx="10" ry="10" fill="#e0f7fa" stroke="#00acc1" stroke-width="2"/>
+  <text x="150" y="130" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Student Input</text>
+  
+  <!-- Student Input Details -->
+  <rect x="70" y="150" width="160" height="40" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1"/>
+  <text x="150" y="175" font-family="Arial" font-size="12" text-anchor="middle">Interests &amp; Skills</text>
+  
+  <rect x="70" y="200" width="160" height="40" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1"/>
+  <text x="150" y="225" font-family="Arial" font-size="12" text-anchor="middle">Career Goals</text>
+  
+  <rect x="70" y="250" width="160" height="40" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1"/>
+  <text x="150" y="275" font-family="Arial" font-size="12" text-anchor="middle">Academic Background</text>
+  
+  <rect x="70" y="300" width="160" height="40" rx="5" ry="5" fill="#b2ebf2" stroke="#00acc1" stroke-width="1"/>
+  <text x="150" y="325" font-family="Arial" font-size="12" text-anchor="middle">Learning Preferences</text>
+  
+  <!-- External Data Sources -->
+  <rect x="50" y="360" width="200" height="120" rx="10" ry="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="150" y="390" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">External Data Sources</text>
+  
+  <rect x="70" y="410" width="50" height="50" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="95" y="440" font-family="Arial" font-size="12" text-anchor="middle">LinkedIn</text>
+  
+  <rect x="130" y="410" width="50" height="50" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="155" y="440" font-family="Arial" font-size="12" text-anchor="middle">GitHub</text>
+  
+  <rect x="190" y="410" width="50" height="50" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="215" y="440" font-family="Arial" font-size="12" text-anchor="middle">Kaggle</text>
+  
+  <!-- Personality Analyzer AI -->
+  <circle cx="410" cy="275" r="125" fill="#bbdefb" stroke="#1976d2" stroke-width="2"/>
+  
+  <!-- Adjusted position of title text -->
+  <text x="410" y="225" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Personality Analyzer AI</text>
+  
+  <!-- Analyzer Components - Slight adjustment to be closer under the title -->
+  <rect x="330" y="250" width="160" height="30" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+  <text x="410" y="270" font-family="Arial" font-size="12" text-anchor="middle">NLP Processing Engine</text>
+  
+  <rect x="330" y="290" width="160" height="30" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+  <text x="410" y="310" font-family="Arial" font-size="12" text-anchor="middle">Pattern Recognition</text>
+  
+  <rect x="330" y="330" width="160" height="30" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1"/>
+  <text x="410" y="350" font-family="Arial" font-size="12" text-anchor="middle">Profile Integration</text>
+  
+  <!-- Output Profile -->
+  <rect x="585" y="150" width="200" height="250" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="685" y="180" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Learner Profile</text>
+  
+  <!-- Profile Components -->
+  <rect x="605" y="200" width="160" height="40" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="685" y="225" font-family="Arial" font-size="12" text-anchor="middle">Technical Skill Assessment</text>
+  
+  <rect x="605" y="250" width="160" height="40" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="685" y="275" font-family="Arial" font-size="12" text-anchor="middle">Career Alignment Map</text>
+  
+  <rect x="605" y="300" width="160" height="40" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="685" y="325" font-family="Arial" font-size="12" text-anchor="middle">Learning Style Parameters</text>
+  
+  <rect x="605" y="350" width="160" height="40" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="685" y="375" font-family="Arial" font-size="12" text-anchor="middle">Personalization Metrics</text>
+  
+  <!-- To Next Component with circular shape below Learner Profile -->
+  <circle cx="685" cy="480" r="35" fill="#fff3e0" stroke="#ff9800" stroke-width="1.5"/>
+  <text x="685" y="470" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">To</text>
+  <text x="685" y="485" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Roadmap</text>
+  <text x="685" y="500" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Generator</text>
+  <path d="M685 400 L685 445" stroke="#ff9800" stroke-width="2.5" fill="none" marker-start="url(#circlestart)" marker-end="url(#arrowhead)"/>
+  
+  <!-- Connection Paths - Improved arrows -->
+  <!-- Student Input to AI -->
+  <path d="M250 220 L285 275" stroke="#00acc1" stroke-width="2.5" fill="none" marker-start="url(#circlestart)" marker-end="url(#arrowhead)"/>
+  
+  <!-- External Sources to AI - Fixed arrow to be more horizontal -->
+  <path d="M250 420 L300 400 L310 350" stroke="#4caf50" stroke-width="2.5" fill="none" marker-start="url(#circlestart)" marker-end="url(#arrowhead)"/>
+  
+  <!-- AI to Output Profile -->
+  <path d="M535 275 L585 275" stroke="#1976d2" stroke-width="3" fill="none" marker-start="url(#circlestart)" marker-end="url(#arrowhead)"/>
+  
+  <!-- Welcome Session -->
+  <rect x="310" y="80" width="200" height="50" rx="10" ry="10" fill="#e1bee7" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="410" y="110" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">AI Welcome Session</text>
+  <path d="M410 130 L410 165" stroke="#8e24aa" stroke-width="2.5" fill="none" marker-start="url(#circlestart)" marker-end="url(#arrowhead)"/>
+  
+  <!-- Marker definitions -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+    <marker id="circlestart" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <circle cx="3" cy="3" r="2" fill="#555"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800">
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="500" y="40" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">PBSC-Ignite Full System Architecture</text>
+  
+  <!-- Central System Boundary -->
+  <rect x="100" y="150" width="800" height="540" rx="15" ry="15" fill="none" stroke="#9e9e9e" stroke-width="2" stroke-dasharray="10,5"/>
+  <text x="140" y="180" font-family="Arial" font-size="14" font-style="italic" fill="#757575">PBSC-Ignite AI Ecosystem</text>
+  
+  <!-- Student/User -->
+  <circle cx="500" cy="100" r="40" fill="#f5f5f5" stroke="#616161" stroke-width="2.5"/>
+  <text x="500" y="105" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Student</text>
+  
+  <!-- Personality Analyzer -->
+  <rect x="150" y="200" width="180" height="100" rx="10" ry="10" fill="#bbdefb" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="240" y="235" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Personality Analyzer</text>
+  <text x="240" y="260" font-family="Arial" font-size="14" text-anchor="middle">&amp; Data Collector</text>
+  <text x="240" y="285" font-family="Arial" font-size="12" text-anchor="middle">Profile Building &amp; Analysis</text>
+  
+  <!-- Roadmap Generator -->
+  <rect x="410" y="200" width="180" height="100" rx="10" ry="10" fill="#bbdefb" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="500" y="235" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Roadmap Generator</text>
+  <text x="500" y="260" font-family="Arial" font-size="14" text-anchor="middle">AI</text>
+  <text x="500" y="285" font-family="Arial" font-size="12" text-anchor="middle">Dynamic Learning Path Creation</text>
+  
+  <!-- AI Mentor -->
+  <rect x="670" y="200" width="180" height="100" rx="10" ry="10" fill="#bbdefb" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="760" y="235" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">AI Mentor</text>
+  <text x="760" y="260" font-family="Arial" font-size="14" text-anchor="middle">for Daily Learning</text>
+  <text x="760" y="285" font-family="Arial" font-size="12" text-anchor="middle">Interactive Sessions &amp; Guidance</text>
+  
+  <!-- Progress Tracking -->
+  <rect x="410" y="360" width="180" height="100" rx="10" ry="10" fill="#e1bee7" stroke="#8e24aa" stroke-width="2.5"/>
+  <text x="500" y="395" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Progress Tracking</text>
+  <text x="500" y="420" font-family="Arial" font-size="14" text-anchor="middle">AI</text>
+  <text x="500" y="445" font-family="Arial" font-size="12" text-anchor="middle">Comprehensive Performance Analytics</text>
+  
+  <!-- Career Showcase -->
+  <rect x="670" y="360" width="180" height="100" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2.5"/>
+  <text x="760" y="395" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Career Showcase</text>
+  <text x="760" y="420" font-family="Arial" font-size="14" text-anchor="middle">&amp; Industry Visibility</text>
+  <text x="760" y="445" font-family="Arial" font-size="12" text-anchor="middle">Professional Brand Building</text>
+  
+  <!-- External Data Sources -->
+  <rect x="150" y="360" width="180" height="100" rx="10" ry="10" fill="#e0f2f1" stroke="#009688" stroke-width="2.5"/>
+  <text x="240" y="395" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">External Data</text>
+  <text x="240" y="420" font-family="Arial" font-size="14" text-anchor="middle">Sources</text>
+  <text x="240" y="445" font-family="Arial" font-size="12" text-anchor="middle">LinkedIn, GitHub, Kaggle, etc.</text>
+  
+  <!-- Leo Chatbot - Central Component -->
+  <ellipse cx="500" cy="550" rx="180" ry="80" fill="#ffecb3" stroke="#ffa000" stroke-width="3"/>
+  <text x="500" y="530" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#ff8f00">Leo AI Companion</text>
+  <text x="500" y="560" font-family="Arial" font-size="16" text-anchor="middle">24/7 Support &amp; Guidance</text>
+  <text x="500" y="580" font-family="Arial" font-size="14" text-anchor="middle">Central Integration Hub</text>
+  
+  <!-- External Stakeholders -->
+  <rect x="200" y="700" width="180" height="70" rx="8" ry="8" fill="#f5f5f5" stroke="#616161" stroke-width="2.5"/>
+  <text x="290" y="735" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Faculty &amp; Universities</text>
+  <text x="290" y="755" font-family="Arial" font-size="12" text-anchor="middle">Educational Assessment</text>
+  
+  <rect x="620" y="700" width="180" height="70" rx="8" ry="8" fill="#f5f5f5" stroke="#616161" stroke-width="2.5"/>
+  <text x="710" y="735" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Hiring Professionals</text>
+  <text x="710" y="755" font-family="Arial" font-size="12" text-anchor="middle">Skill-based Recruitment</text>
+  
+  <!-- Core Flow Connections -->
+  <!-- Student to System -->
+  <path d="M500 140 L500 200" stroke="#616161" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Main Data Flow Path -->
+  <path d="M330 250 L410 250" stroke="#1976d2" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M590 250 L670 250" stroke="#1976d2" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M760 300 L760 360" stroke="#1976d2" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- External Data to Personality Analyzer -->
+  <path d="M240 360 L240 300" stroke="#009688" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- AI Mentor to Progress Tracking -->
+  <path d="M700 300 L560 360" stroke="#1976d2" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Progress Tracking to All Components -->
+  <path d="M410 410 L330 410" stroke="#8e24aa" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M590 410 L670 410" stroke="#8e24aa" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Connections to External Stakeholders -->
+  <path d="M450 460 L290 700" stroke="#8e24aa" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M700 460 L710 700" stroke="#ff9800" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Feedback Loops - Dashed Lines -->
+  <!-- AI Mentor back to Roadmap -->
+  <path d="M670 230 L590 230" stroke="#1976d2" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="630" y="220" font-family="Arial" font-size="12" font-style="italic" fill="#1976d2">Learning Insights</text>
+  
+  <!-- Progress Tracking back to Roadmap -->
+  <path d="M500 360 L500 300" stroke="#8e24aa" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="520" y="330" font-family="Arial" font-size="12" font-style="italic" fill="#8e24aa">Path Optimization</text>
+  
+  <!-- Progress Tracking to AI Mentor -->
+  <path d="M550 360 L700 300" stroke="#8e24aa" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="610" y="330" font-family="Arial" font-size="12" font-style="italic" fill="#8e24aa">Teaching Adaptation</text>
+  
+  <!-- Leo Integration Connections -->
+  <!-- Core System to Leo -->
+  <path d="M240 460 L350 530" stroke="#1976d2" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M500 460 L500 470" stroke="#8e24aa" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M760 460 L650 530" stroke="#ff9800" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  
+  <!-- Leo Feedback to All Components -->
+  <path d="M400 490 L250 300" stroke="#ffa000" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="300" y="400" font-family="Arial" font-size="12" font-style="italic" fill="#ffa000">Profile Refinement</text>
+  
+  <path d="M500 470 L500 460" stroke="#ffa000" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <path d="M600 490 L750 300" stroke="#ffa000" stroke-width="2" stroke-dasharray="6,3" fill="none" marker-end="url(#arrow)"/>
+  <text x="700" y="390" font-family="Arial" font-size="12" font-style="italic" fill="#ffa000">Informal Learning Data</text>
+  
+  <!-- Student and Leo Connection -->
+  <path d="M530 140 C 650 150, 750 350, 650 500" stroke="#4caf50" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M350 500 C 250 350, 350 150, 470 140" stroke="#4caf50" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="600" y="180" font-family="Arial" font-size="14" text-anchor="middle" fill="#4caf50">24/7 Interaction</text>
+  
+  <!-- Communication Flows Labels -->
+  <text x="240" y="180" font-family="Arial" font-size="14" font-weight="bold" fill="#1976d2">Primary Data Flow</text>
+  <text x="760" y="180" font-family="Arial" font-size="14" font-weight="bold" fill="#ffa000">Feedback Loops</text>
+  <text x="500" y="650" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Continuous Communication &amp; Adaptation</text>
+  
+  <!-- Legend -->
+  <rect x="800" y="700" width="180" height="80" rx="5" ry="5" fill="white" stroke="#333" stroke-width="1.5"/>
+  <text x="890" y="720" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Legend</text>
+  
+  <line x1="820" y1="740" x2="860" y2="740" stroke="#1976d2" stroke-width="2.5"/>
+  <text x="930" y="745" font-family="Arial" font-size="12" text-anchor="middle">Primary Flow</text>
+  
+  <line x1="820" y1="765" x2="860" y2="765" stroke="#333" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="930" y="770" font-family="Arial" font-size="12" text-anchor="middle">Feedback Loop</text>
+  
+  <!-- Adaptive Intelligence Label -->
+  <text x="400" y="600" font-family="Arial" font-size="14" font-style="italic" fill="#757575">Pattern Recognition</text>
+  <text x="600" y="600" font-family="Arial" font-size="14" font-style="italic" fill="#757575">Adaptive Intelligence</text>
+  
+  <!-- Bidirectional Data Exchange -->
+  <path d="M500 500 Q 700 650, 400 680 Q 200 700, 240 460" stroke="#9C27B0" stroke-width="1.5" stroke-dasharray="3,2" fill="none"/>
+  <text x="400" y="680" font-family="Arial" font-size="12" font-style="italic" fill="#9C27B0">Bidirectional Data Exchange Across All Components</text>
+  
+  <!-- Title decorations -->
+  <line x1="350" y1="50" x2="650" y2="50" stroke="#1976d2" stroke-width="2"/>
+  <line x1="350" y1="51" x2="650" y2="51" stroke="#ff9800" stroke-width="2"/>
+  
+  <!-- Arrowhead marker definition -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+    </marker>
+  </defs>
+</svg>

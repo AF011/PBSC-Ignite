@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 550">
+  <!-- Background -->
+  <rect width="820" height="550" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="410" y="40" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#333">The AI Companion - Leo Chatbot</text>
+  
+  <!-- Leo Chatbot Central Component -->
+  <circle cx="410" cy="250" r="130" fill="#ffecb3" stroke="#ffa000" stroke-width="3"/>
+  <text x="410" y="180" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#ff8f00">Leo</text>
+  <text x="410" y="210" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#ff8f00">AI Companion</text>
+  
+  <!-- Leo's Core Components -->
+  <rect x="335" y="230" width="150" height="30" rx="5" ry="5" fill="#ffe082" stroke="#ffa000" stroke-width="1.5"/>
+  <text x="410" y="250" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Personalized Memory</text>
+  
+  <rect x="335" y="270" width="150" height="30" rx="5" ry="5" fill="#ffe082" stroke="#ffa000" stroke-width="1.5"/>
+  <text x="410" y="290" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Contextual Understanding</text>
+  
+  <rect x="335" y="310" width="150" height="30" rx="5" ry="5" fill="#ffe082" stroke="#ffa000" stroke-width="1.5"/>
+  <text x="410" y="330" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Guidance Generator</text>
+  
+  <!-- Input Sources - Top Left Section -->
+  <rect x="50" y="100" width="200" height="80" rx="10" ry="10" fill="#e0f2f1" stroke="#009688" stroke-width="2"/>
+  <text x="150" y="130" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Roadmap Generator</text>
+  <text x="150" y="155" font-family="Arial" font-size="12" text-anchor="middle">Learning Path &amp; Progress</text>
+  <!-- Arrow directly to the Leo circle border -->
+  <path d="M250 140 C 280 140, 300 140, 295 175" stroke="#009688" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Input Source 2 - Top Middle -->
+  <rect x="50" y="190" width="200" height="80" rx="10" ry="10" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2"/>
+  <text x="150" y="220" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">AI Mentor</text>
+  <text x="150" y="245" font-family="Arial" font-size="12" text-anchor="middle">Learning Insights &amp; Challenges</text>
+  <!-- Arrow directly to the Leo circle border -->
+  <path d="M250 230 C 280 230, 295 230, 280 250" stroke="#3f51b5" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Input Source 3 - Middle Left -->
+  <rect x="50" y="280" width="200" height="80" rx="10" ry="10" fill="#e1bee7" stroke="#8e24aa" stroke-width="2"/>
+  <text x="150" y="310" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Progress Tracking</text>
+  <text x="150" y="335" font-family="Arial" font-size="12" text-anchor="middle">Performance Metrics &amp; Analysis</text>
+  <!-- Arrow directly to the Leo circle border -->
+  <path d="M250 320 C 270 320, 280 320, 280 300" stroke="#8e24aa" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Input Source 4 - Bottom Left -->
+  <rect x="50" y="370" width="200" height="80" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="150" y="400" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">External Data</text>
+  <text x="150" y="425" font-family="Arial" font-size="12" text-anchor="middle">LinkedIn, GitHub, Contributions</text>
+  <!-- Arrow directly to the Leo circle border -->
+  <path d="M250 410 C 280 400, 300 380, 310 360" stroke="#ff9800" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Interaction Types - Right Section -->
+  <rect x="570" y="80" width="200" height="340" rx="10" ry="10" fill="#f9fbe7" stroke="#afb42b" stroke-width="2"/>
+  <text x="670" y="110" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Interaction Types</text>
+  
+  <!-- Interaction 1 -->
+  <rect x="590" y="130" width="160" height="60" rx="8" ry="8" fill="#f0f4c3" stroke="#afb42b" stroke-width="1.5"/>
+  <text x="670" y="150" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Technical Guidance</text>
+  <text x="670" y="170" font-family="Arial" font-size="10" text-anchor="middle">Concept Explanations &amp;</text>
+  <text x="670" y="185" font-family="Arial" font-size="10" text-anchor="middle">Problem Solving Support</text>
+  
+  <!-- Interaction 2 -->
+  <rect x="590" y="200" width="160" height="60" rx="8" ry="8" fill="#f0f4c3" stroke="#afb42b" stroke-width="1.5"/>
+  <text x="670" y="220" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Learning Assistance</text>
+  <text x="670" y="240" font-family="Arial" font-size="10" text-anchor="middle">Resource Recommendations &amp;</text>
+  <text x="670" y="255" font-family="Arial" font-size="10" text-anchor="middle">Study Strategy Optimization</text>
+  
+  <!-- Interaction 3 -->
+  <rect x="590" y="270" width="160" height="60" rx="8" ry="8" fill="#f0f4c3" stroke="#afb42b" stroke-width="1.5"/>
+  <text x="670" y="290" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Career Guidance</text>
+  <text x="670" y="310" font-family="Arial" font-size="10" text-anchor="middle">Skill Development Advice &amp;</text>
+  <text x="670" y="325" font-family="Arial" font-size="10" text-anchor="middle">Industry Trend Insights</text>
+  
+  <!-- Interaction 4 -->
+  <rect x="590" y="340" width="160" height="60" rx="8" ry="8" fill="#f0f4c3" stroke="#afb42b" stroke-width="1.5"/>
+  <text x="670" y="360" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Motivational Support</text>
+  <text x="670" y="380" font-family="Arial" font-size="10" text-anchor="middle">Personalized Encouragement &amp;</text>
+  <text x="670" y="395" font-family="Arial" font-size="10" text-anchor="middle">Learning Milestone Celebration</text>
+  
+  <!-- Connection from Leo to Interactions -->
+  <path d="M540 250 L570 250" stroke="#ffa000" stroke-width="2.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- User Interface Component -->
+  <rect x="300" y="430" width="220" height="100" rx="10" ry="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="410" y="455" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">24/7 Chat Interface</text>
+  
+  <!-- Chat Elements -->
+  <rect x="320" y="470" width="180" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="410" y="487" font-family="Arial" font-size="12" text-anchor="middle">Natural Language Processing</text>
+  
+  <rect x="320" y="500" width="85" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="362" y="517" font-family="Arial" font-size="12" text-anchor="middle">Multi-modal</text>
+  
+  <rect x="415" y="500" width="85" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="457" y="517" font-family="Arial" font-size="12" text-anchor="middle">Context-aware</text>
+  
+  <!-- Two-way connection between Chat Interface and Leo -->
+  <path d="M410 430 L410 380" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Real-time Updates to System - Rerouted to avoid overlapping -->
+  <path d="M520 430 Q 650 430, 650 200 Q 650 75, 350 75 Q 130 75, 130 100" stroke="#ffa000" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#smallarrow)"/>
+  <text x="600" y="450" font-family="Arial" font-size="12" font-style="italic" text-anchor="middle">Real-time Feedback</text>
+  <text x="600" y="465" font-family="Arial" font-size="12" font-style="italic" text-anchor="middle">to System Components</text>
+  
+  <!-- Marker definitions -->
+  <defs>
+    <!-- Smaller arrowhead for all connections -->
+    <marker id="smallarrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+      <polygon points="0 0, 8 2.5, 0 5" fill="#555"/>
+    </marker>
+    <marker id="circlestart" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <circle cx="3" cy="3" r="2" fill="#555"/>
+    </marker>
+  </defs>
+</svg>

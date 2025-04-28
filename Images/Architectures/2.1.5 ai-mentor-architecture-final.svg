@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 550">
+  <!-- Background -->
+  <rect width="820" height="550" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="410" y="40" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#333">AI Mentor for Daily Learning</text>
+  
+  <!-- Input from Roadmap Generator - Removed "From" -->
+  <circle cx="90" cy="120" r="35" fill="#e0f2f1" stroke="#009688" stroke-width="1.5"/>
+  <text x="90" y="120" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Roadmap</text>
+  <text x="90" y="135" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Generator</text>
+  
+  <!-- Today's Learning Topic -->
+  <rect x="35" y="180" width="110" height="100" rx="10" ry="10" fill="#e0f2f1" stroke="#009688" stroke-width="1.5"/>
+  <text x="90" y="200" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Today's Topic</text>
+  
+  <rect x="45" y="215" width="90" height="55" rx="5" ry="5" fill="#b2dfdb" stroke="#009688" stroke-width="1"/>
+  <text x="90" y="235" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle">Data Structures:</text>
+  <text x="90" y="255" font-family="Arial" font-size="11" text-anchor="middle">Binary Trees</text>
+  
+  <!-- Arrow from Roadmap Generator to Today's Topic - Smaller arrowhead -->
+  <path d="M90 155 L90 180" stroke="#009688" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Start Learning Button -->
+  <rect x="50" y="300" width="80" height="30" rx="15" ry="15" fill="#4caf50" stroke="#2e7d32" stroke-width="1.5"/>
+  <text x="90" y="320" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Start Learning</text>
+  
+  <!-- Arrow from Today's Topic to Start Learning - Smaller arrowhead -->
+  <path d="M90 280 L90 300" stroke="#2e7d32" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Connection from Start Learning to AI Mentor -->
+  <path d="M130 315 L175 315" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- AI Mentor Circle - Moved up -->
+  <circle cx="300" cy="250" r="140" fill="#bbdefb" stroke="#1976d2" stroke-width="2.5"/>
+  
+  <!-- AI Mentor title -->
+  <text x="300" y="170" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">AI Mentor</text>
+  
+  <!-- AI Mentor Components -->
+  <rect x="200" y="200" width="200" height="35" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="300" y="223" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Concept Explanation Engine</text>
+  
+  <rect x="200" y="245" width="200" height="35" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="300" y="268" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Resource Aggregator</text>
+  
+  <rect x="200" y="290" width="200" height="35" rx="5" ry="5" fill="#90caf9" stroke="#1976d2" stroke-width="1.5"/>
+  <text x="300" y="313" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Understanding Evaluator</text>
+  
+  <!-- Student's Learning Resources -->
+  <rect x="35" y="350" width="110" height="180" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="1.5"/>
+  <text x="90" y="370" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Learning Resources</text>
+  
+  <rect x="45" y="385" width="90" height="30" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="90" y="404" font-family="Arial" font-size="10" text-anchor="middle">Previous Knowledge</text>
+  
+  <rect x="45" y="425" width="90" height="30" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="90" y="444" font-family="Arial" font-size="10" text-anchor="middle">Learning Preferences</text>
+  
+  <rect x="45" y="465" width="90" height="30" rx="5" ry="5" fill="#ffe0b2" stroke="#ff9800" stroke-width="1"/>
+  <text x="90" y="484" font-family="Arial" font-size="10" text-anchor="middle">Career Goals</text>
+  
+  <!-- Connection from Resources to AI Mentor -->
+  <path d="M145 440 L175 350" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Interactive Learning Session -->
+  <rect x="500" y="80" width="270" height="330" rx="10" ry="10" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2.5"/>
+  <text x="635" y="110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">Interactive Learning Session</text>
+  
+  <!-- Learning Session Components -->
+  <rect x="520" y="130" width="230" height="80" rx="5" ry="5" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5"/>
+  <text x="635" y="150" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Concept Explanations</text>
+  
+  <rect x="535" y="170" width="200" height="30" rx="3" ry="3" fill="#9fa8da" stroke="#3f51b5" stroke-width="1"/>
+  <text x="635" y="190" font-family="Arial" font-size="11" text-anchor="middle">Text, Audio &amp; Visual Formats</text>
+  
+  <rect x="520" y="220" width="230" height="80" rx="5" ry="5" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5"/>
+  <text x="635" y="240" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Curated Learning Resources</text>
+  
+  <rect x="535" y="260" width="95" height="30" rx="3" ry="3" fill="#9fa8da" stroke="#3f51b5" stroke-width="1"/>
+  <text x="583" y="280" font-family="Arial" font-size="10" text-anchor="middle">YouTube Videos</text>
+  
+  <rect x="640" y="260" width="95" height="30" rx="3" ry="3" fill="#9fa8da" stroke="#3f51b5" stroke-width="1"/>
+  <text x="687" y="280" font-family="Arial" font-size="10" text-anchor="middle">GitHub Repositories</text>
+  
+  <rect x="520" y="310" width="230" height="80" rx="5" ry="5" fill="#c5cae9" stroke="#3f51b5" stroke-width="1.5"/>
+  <text x="635" y="330" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle">Interactive Q&amp;A Discussion</text>
+  
+  <rect x="535" y="350" width="200" height="30" rx="3" ry="3" fill="#9fa8da" stroke="#3f51b5" stroke-width="1"/>
+  <text x="635" y="370" font-family="Arial" font-size="11" text-anchor="middle">Personalized Guidance</text>
+  
+  <!-- Progress Tracking Section - Moved further right -->
+  <rect x="540" y="420" width="230" height="120" rx="10" ry="10" fill="#e1bee7" stroke="#8e24aa" stroke-width="2.5"/>
+  <text x="655" y="445" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle">Progress Tracking</text>
+  
+  <!-- Progress Tracking Components -->
+  <rect x="550" y="460" width="210" height="30" rx="5" ry="5" fill="#ce93d8" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="655" y="480" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Real-time Understanding Assessment</text>
+  
+  <rect x="550" y="500" width="100" height="30" rx="5" ry="5" fill="#ce93d8" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="600" y="520" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle">Learning Metrics</text>
+  
+  <rect x="660" y="500" width="100" height="30" rx="5" ry="5" fill="#ce93d8" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="710" y="520" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle">Skill Development</text>
+  
+  <!-- Progress tracking connections -->
+  <!-- To Roadmap Generator - Fixed to follow white space with curves -->
+  <path d="M540 480 C 450 480, 350 400, 300 380 C 250 360, 200 270, 150 180 C 130 150, 120 155, 100 155" stroke="#8e24aa" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#smallarrow)"/>
+  <text x="300" y="430" font-family="Arial" font-size="12" font-style="italic" text-anchor="middle">To Roadmap Generator</text>
+  
+  <!-- To Student Progress Dashboard -->
+  <rect x="380" y="450" width="100" height="40" rx="5" ry="5" fill="#e1bee7" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="430" y="470" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle">Student</text>
+  <text x="430" y="482" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle">Dashboard</text>
+  <path d="M540 480 L480 470" stroke="#8e24aa" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- To Educational Institutions - Further widened box -->
+  <rect x="280" y="510" width="240" height="30" rx="5" ry="5" fill="#e1bee7" stroke="#8e24aa" stroke-width="1.5"/>
+  <text x="400" y="530" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">Educational Institutions &amp; Employers</text>
+  <path d="M540 520 L520 525" stroke="#8e24aa" stroke-width="1.5" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- AI to Interactive Learning Session -->
+  <path d="M440 250 L500 250" stroke="#1976d2" stroke-width="3" fill="none" marker-start="url(#circlestart)" marker-end="url(#smallarrow)"/>
+  
+  <!-- External Learning Resources - Moved up to avoid overlap -->
+  <rect x="200" y="370" width="200" height="120" rx="10" ry="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="1.5"/>
+  <text x="300" y="395" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">External Resources</text>
+  
+  <rect x="220" y="410" width="160" height="25" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="300" y="427" font-family="Arial" font-size="11" text-anchor="middle">Documentation &amp; Research Papers</text>
+  
+  <rect x="220" y="445" width="75" height="35" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="257" y="467" font-family="Arial" font-size="10" text-anchor="middle">Video Tutorials</text>
+  
+  <rect x="305" y="445" width="75" height="35" rx="5" ry="5" fill="#c8e6c9" stroke="#4caf50" stroke-width="1"/>
+  <text x="342" y="467" font-family="Arial" font-size="10" text-anchor="middle">Code Examples</text>
+  
+  <!-- Connection from External Resources to AI -->
+  <path d="M300 370 L300 340" stroke="#4caf50" stroke-width="2" fill="none" marker-end="url(#smallarrow)"/>
+  
+  <!-- Marker definitions -->
+  <defs>
+    <!-- Smaller arrowhead for all connections -->
+    <marker id="smallarrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto">
+      <polygon points="0 0, 8 2.5, 0 5" fill="#555"/>
+    </marker>
+    <marker id="circlestart" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+      <circle cx="3" cy="3" r="2" fill="#555"/>
+    </marker>
+  </defs>
+</svg>
