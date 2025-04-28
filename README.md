@@ -61,7 +61,7 @@ PBSC-Ignite addresses these challenges by providing AI-powered personalized lear
 
 ### AI Technologies
 - Gemini Flash 1.5 for real-time assistance and chat interactions
-- meta-llama/llama-4-scout-17b-16e-instruct for roadmap generation and AI guidance
+- Groq cloud with meta-llama/llama-4-scout-17b-16e-instruct for roadmap generation and AI guidance
 
 ## ⚙️ Installation
 
